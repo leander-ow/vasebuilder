@@ -24,7 +24,7 @@ body {
 
 .main-content {
     height: calc(100% - 72px);
-    padding: 3rem;
+    padding: 1rem;
 }
 
 .top-left, .bottom-left {
