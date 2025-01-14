@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaseBuilder</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Import Map -->
+    <script type="importmap">
+        {
+                "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@v0.164.1/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.164.1/examples/jsm/",
+                "mathjs": "https://cdn.skypack.dev/mathjs@11.5.0"
+            }
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div>VaseBuilder</div>
+    </header>
+    <div class="container-fluid main-content">
+        <div class="row h-100">
+            <!-- Left Panel -->
+            <div class="col-md-6 h-100">
+                <div class="top-left">
+                    <div class="content-box">
+                        <form id="dataForm">
+                            <!-- Input Fields -->
+                            <div class="form-group row">
+                                <label for="inputString" class="col-sm-4 col-form-label textFieldLabel">f(x) = <i class="fa-solid fa-circle-question"></i></i></label>
+                                <div class="col">
+                                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                                    <input type="text" class="form-control textField" id="inputString" placeholder="Enter math function" required value="0.0055x^3 - 0.18x^2 + 1.5x + 4">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="area" class="col-sm-4 col-form-label textFieldLabel">Size (cm)</label>
+                                <div class="col">
+                                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                                    <input type="text" class="form-control textField" id="area" placeholder="Enter size" required value="20" oninput="validateNumber(this)">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="wallThickness" class="col-sm-4 col-form-label textFieldLabel">Wall Thickness (cm)</label>
+                                <div class="col">
+                                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                                    <input type="text" class="form-control textField" id="wallThickness" placeholder="Enter wall thickness" required value="0.1" oninput="validateNumber(this)">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="floorThickness" class="col-sm-4 col-form-label textFieldLabel">Floor Thickness (cm)</label>
+                                <div class="col">
+                                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                                    <input type="text" class="form-control textField" id="floorThickness" placeholder="Enter floor thickness" required value="0.1" oninput="validateNumber(this)">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="res" class="col-sm-4 col-form-label textFieldLabel">Vert. Res. (Verts/cm)</label>
+                                <div class="col">
+                                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                                    <input type="text" class="form-control textField" id="res" placeholder="Enter resolution" required value="5" oninput="validateInteger(this)">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="steps" class="col-sm-4 col-form-label textFieldLabel">Rot. Res. (Verts/Rev)</label>
+                                <div class="col">
+                                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                                    <input type="text" class="form-control textField" id="steps" placeholder="Enter resolution" required value="4" oninput="validateNumber(this)">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="bottom-left">
+                    <div class="content-box">
+                        <svg id="coordinate-system"></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="col-md-6 h-100">
+                <div class="right-side">
+                    <div id="threejs-container"></div>
+                    
+                    <!-- Buttons -->
+                    <div class="buttons">
+                        <i class="fa-solid fa-palette"></i>
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    
+                    <!-- Color Menu -->
+                    <div class="color-menu">
+                        <div class="color-container">
+                            <h1>Clay</h1>
+                            <div class="colors">
+                                <div class="color color-clay-1 selected"></div>
+                                <div class="color color-clay-2"></div>
+                                <div class="color color-clay-3"></div>
+                                <div class="color color-clay-4"></div>
+                                <div class="color color-clay-5"></div>
+                                <div class="color color-clay-6"></div>
+                            </div>
+                        </div>
+                        <div class="color-container">
+                            <h1>Basic</h1>
+                            <div class="colors">
+                                <div class="color color-basic-1"></div>
+                                <div class="color color-basic-2"></div>
+                                <div class="color color-basic-3"></div>
+                                <div class="color color-basic-4"></div>
+                                <div class="color color-basic-5"></div>
+                                <div class="color color-basic-6"></div>
+                            </div>
+                        </div>
+                        <div class="color-container">
+                            <h1>Pastel</h1>
+                            <div class="colors">
+                                <div class="color color-pastel-1"></div>
+                                <div class="color color-pastel-2"></div>
+                                <div class="color color-pastel-3"></div>
+                                <div class="color color-pastel-4"></div>
+                                <div class="color color-pastel-5"></div>
+                                <div class="color color-pastel-6"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Export Button -->
+                    <div class="buttons export-button">
+                        <i class="fa-solid fa-download"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content dark-box text-light">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infoModalLabel">f(x) =</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Here you can enter a mathematical function. The outer wall of the vase is calculated based on this.</p>
+                        <p>Here are some examples of cool vases:</p>
+                        <p><code>
+                            <p>f(x) = sin(x) + 8</p>
+                            <p>f(x) = 0.0055x^3 - 0.18x^2 + 1.5x + 4</p>
+                        </code></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="src/main.js"></script>
+    <script type="module" src="src/colorPicker.js"></script>
+    <script type="module" src="src/inputValidation.js"></script>
+    <script type="module" src="src/resetInput.js"></script>
+    <script type="module" src="src/export.js"></script>
+    <script type="module" src="src/help.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    background-color: #121212;
+    color: #f1f1f1;
+}
+
+.header {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.main-content {
+    height: calc(100% - 72px);
+    padding: 3rem;
+}
+
+.top-left, .bottom-left {
+    height: calc(50% - 15px);
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #333;
+    margin-bottom: 30px;
+}
+
+.right-side {
+    height: 100%;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+#threejs-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: #333;
+}
+
+.content-box {
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+    margin: 25px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.textField {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    color: #ccc;
+    background-color: #333;
+    border-radius: 5px;
+    border: 1px solid #555;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    white-space: nowrap;
+}
+
+.textField:focus {
+    outline: none;
+    border-color: #999;
+    color: #ccc;
+    background-color: #333;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.textFieldLabel {
+    color: #ccc;
+    font-size: 16px;
+    display: block;
+    white-space: nowrap;
+    flex: none;
+    min-width: 100px;
+    max-width: 200px;
+    width: 33,333333%;
+    margin-right: 50px;
+}
+
+.h-100 {
+    margin-bottom: 30px;
+}
+
+.col {
+    display: flex;
+    min-width: 250px;
+    gap: 10px;
+    font-size: 1rem;
+    align-items: center; 
+}
+
+.col i {
+    color: #555;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.col i:hover {
+    transform: scale(1.2);
+}
+
+.row {
+    padding: 6px;
+}
+
+.dark-box {
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #333;
+}
+
+code {
+    color: unset;
+}
+
+.fa-circle-question {
+    font-size: 12px;
+    color: #555;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.fa-circle-question:hover {
+    transform: scale(1.2);
+}
+
+.buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.buttons i {
+    font-size: 25px;
+    color: #555;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.buttons i:hover {
+    transform: scale(1.2);
+}
+
+.color-menu {
+    display: none;
+    position: absolute;
+    bottom: 55px;
+    left: 20px;
+    background-color: #555;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.color-menu.show {
+    display: block;
+}
+
+.color-container h1 {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.colors {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.color {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.color:hover {
+    transform: scale(1.2);
+}
+
+.selected {
+    border: 2px solid #aaa;
+    transform: scale(1.2);
+}
+
+.color-clay-1 { background-color: #A96A5B; }
+.color-clay-2 { background-color: #6A7D8C; }
+.color-clay-3 { background-color: #C4A484; }
+.color-clay-4 { background-color: #7A8F76; }
+.color-clay-5 { background-color: #D0836A; }
+.color-clay-6 { background-color: #8B8C91; }
+
+.color-basic-1 { background-color: red; }
+.color-basic-2 { background-color: blue; }
+.color-basic-3 { background-color: yellow; }
+.color-basic-4 { background-color: green; }
+.color-basic-5 { background-color: orange; }
+.color-basic-6 { background-color: purple; }
+
+.color-pastel-1 { background-color: pink; }
+.color-pastel-2 { background-color: lightblue; }
+.color-pastel-3 { background-color: lightyellow; }
+.color-pastel-4 { background-color: lightgreen; }
+.color-pastel-5 { background-color: salmon; }
+.color-pastel-6 { background-color: violet; }
+
+.export-button {
+    left: unset;
+    right: 20px;
+}
